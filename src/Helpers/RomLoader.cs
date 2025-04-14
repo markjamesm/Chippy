@@ -38,7 +38,7 @@ public static class RomLoader
             switch (romChoice)
             {
                 case "1":
-                    return romDirectory + "IBM-Logo.ch8";
+                    return romDirectory + "chip8-logo.ch8";
                 case "2":
                     Console.WriteLine("Exiting Chippy...");
                     Environment.Exit(0);
