@@ -7,4 +7,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="$(SolutionDir)roms\**"
+              CopyToOutputDirectory="PreserveNewest"
+              LinkBase="roms\" />
+    </ItemGroup>
 </Project>
