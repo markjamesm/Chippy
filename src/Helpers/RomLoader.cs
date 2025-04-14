@@ -30,7 +30,7 @@ public static class RomLoader
         {
             Console.WriteLine("Select ROM to load:\n");
             Console.WriteLine("1 - CHIP-8 Splash Screen");
-            Console.WriteLine("2 - Exit Chippy");
+            Console.WriteLine("2 - Exit Chippy\n");
             Console.Write("Enter your choice: ");
 
             var romChoice = Console.ReadLine();
@@ -44,7 +44,7 @@ public static class RomLoader
                     Environment.Exit(0);
                     break;
                 default:
-                    Console.WriteLine("Invalid input. Try again.");
+                    Console.WriteLine("\nInvalid input. Try again.");
                     Console.WriteLine("");
                     break;
             }
