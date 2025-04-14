@@ -9,7 +9,8 @@ public static class RomLoader
 
         if (!File.Exists(romPath))
         {
-            Console.WriteLine("Error: Failed to load rom. Check if the rom");
+            Console.WriteLine("Error: Failed to load rom. Exiting...");
+            Environment.Exit(1);
         }
         
         return romPath;
