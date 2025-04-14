@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chippy", "src\Chippy.csproj", "{5A0F8353-50A1-4F07-BB50-AF12C45FD7A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A0F8353-50A1-4F07-BB50-AF12C45FD7A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0F8353-50A1-4F07-BB50-AF12C45FD7A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0F8353-50A1-4F07-BB50-AF12C45FD7A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0F8353-50A1-4F07-BB50-AF12C45FD7A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
