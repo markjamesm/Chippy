@@ -1,9 +1,18 @@
-﻿namespace Chippy;
+﻿using Chippy.Helpers;
+
+namespace Chippy;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        var rom = RomLoader.Load();
+        var emulator = new Emulator(rom);
+
+        while (true)
+        {
+            emulator.Cycle();
+            Thread.Sleep(16);
+        }
     }
 }
