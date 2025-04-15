@@ -71,6 +71,9 @@ public class Emulator
             case 0x4000:
                 Execute4Xnn(x, nn);
                 break;
+            case 0x5000:
+                Execute5Xy0(x, y);
+                break;
             case 0x6000:
                 Execute6Xnn(x, nn);
                 break;
@@ -132,6 +135,14 @@ public class Emulator
     private void Execute4Xnn(byte x, ushort nn)
     {
         if (_v[x] != nn)
+        {
+            _pc += 2;
+        }
+    }
+
+    private void Execute5Xy0(byte x, byte y)
+    {
+        if (_v[x] == _v[y])
         {
             _pc += 2;
         }
