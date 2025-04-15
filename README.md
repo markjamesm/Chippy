@@ -1,12 +1,16 @@
 # Chippy
 
-Chippy is a [CHIP-8](https://en.wikipedia.org/wiki/CHIP-8) emulator written in C#.
+Chippy is a [CHIP-8](https://en.wikipedia.org/wiki/CHIP-8) emulator (technically an interpreter...) written in C#.
 
 ## Tests
 
-Chippy currently passes the following test ROMS from the [CHIP-8 test suite](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file):
+Chippy currently passes the following tests from the [CHIP-8 test suite](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file):
 
 - [CHIP-8 Splash Screen](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file#chip-8-splash-screen): ✅
+
+## Instructions
+
+To run, checkout the source and build. Chippy comes packaged with test ROMs that you can load via the interface on launch.
 
 ## Screenshot
 
