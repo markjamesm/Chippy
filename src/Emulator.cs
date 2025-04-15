@@ -43,10 +43,15 @@ public class Emulator
 
     private void Decode(uint opcode)
     {
+        // x & y refer to registers
         var x = (byte)((opcode & 0x0F00) >> 8);
         var y = (byte)((opcode & 0x00F0) >> 4);
+        
+        // n: hex bite, nn: hex nibble
         var n = (byte)(opcode & 0x000F);
         var nn = (byte)(opcode & 0x00FF);
+        
+        // nnn refers to a hexadecimal memory address.
         var nnn = (ushort)(opcode & 0x0FFF);
 
         switch (opcode & 0xF000)
@@ -59,6 +64,12 @@ public class Emulator
                 break;
             case 0x2000:
                 Execute2Nnn(nnn);
+                break;
+            case 0x3000:
+                Execute3Xnn(x, nn);
+                break;
+            case 0x4000:
+                Execute4Xnn(x, nn);
                 break;
             case 0x6000:
                 Execute6Xnn(x, nn);
@@ -108,6 +119,22 @@ public class Emulator
     {
         _stack.Push(_pc);
         _pc = nnn;
+    }
+
+    private void Execute3Xnn(byte x, ushort nn)
+    {
+        if (_v[x] == nn)
+        {
+            _pc += 2;
+        }
+    }
+
+    private void Execute4Xnn(byte x, ushort nn)
+    {
+        if (_v[x] != nn)
+        {
+            _pc += 2;
+        }
     }
 
     private void Execute6Xnn(byte x, byte nn)
