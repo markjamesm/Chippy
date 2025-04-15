@@ -57,6 +57,9 @@ public class Emulator
             case 0x6000:
                 Execute6Xnn(x, nn);
                 break;
+            case 0x7000:
+                Execute7Xnn(x, nn);
+                break;
             case 0xA000:
                 ExecuteAnnn(nnn);
                 break;
@@ -90,6 +93,11 @@ public class Emulator
     private void Execute6Xnn(byte x, byte nn)
     {
         _v[x] = nn;
+    }
+
+    private void Execute7Xnn(byte x, byte nn)
+    {
+        _v[x] += nn;
     }
 
     private void ExecuteAnnn(ushort nnn)
