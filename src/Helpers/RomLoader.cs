@@ -30,7 +30,8 @@ public static class RomLoader
         {
             Console.WriteLine("Select ROM to load:\n");
             Console.WriteLine("1 - CHIP-8 Splash Screen");
-            Console.WriteLine("2 - Exit Chippy\n");
+            Console.WriteLine("2 - IBM Logo");
+            Console.WriteLine("3 - Exit Chippy\n");
             Console.Write("Enter your choice: ");
 
             var romChoice = Console.ReadLine();
@@ -40,6 +41,8 @@ public static class RomLoader
                 case "1":
                     return romDirectory + "chip8-logo.ch8";
                 case "2":
+                    return romDirectory + "ibm-logo.ch8";
+                case "3":
                     Console.WriteLine("Exiting Chippy...");
                     Environment.Exit(0);
                     break;
