@@ -22,11 +22,28 @@ public class Emulator
         FontSet.Fonts.CopyTo(_memory, 0);
     }
 
-    public uint FetchOpcode()
+    public void Cycle()
+    {
+        var opcode = FetchOpcode();
+        Decode(opcode);
+    }
+
+    private uint FetchOpcode()
     {
         var opcode = (uint)_memory[_pc] << 8 | _memory[_pc + 1];
         _pc++;
         
         return opcode;
+    }
+
+    private void Decode(uint opcode)
+    {
+        var x = (byte)((opcode & 0x0F00) >> 8);
+        var y = (byte)((opcode & 0x00F0) >> 4);
+        var n = (byte)(opcode & 0x000F);
+        var nn = (byte)(opcode & 0x00FF);
+        var nnn = (ushort)(opcode & 0x0FFF);
+        
+        Console.WriteLine($"x: {x:X4} y: {y:X4} n: {n:X4} nn: {nn:X4} nnn: {nnn:X4}");
     }
 }
