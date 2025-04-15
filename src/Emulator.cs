@@ -12,6 +12,9 @@ public class Emulator
 
     // Program counter, start at program memory.
     private int _pc = 0x200;
+    
+    private Stack<int> _stack = new(16);
+    
     private const int ProgramStart = 0x200;
     private const int FontStart = 0;
     
@@ -54,6 +57,9 @@ public class Emulator
             case 0x1000:
                 Execute1Nnn(nnn);
                 break;
+            case 0x2000:
+                Execute2Nnn(nnn);
+                break;
             case 0x6000:
                 Execute6Xnn(x, nn);
                 break;
@@ -77,6 +83,9 @@ public class Emulator
             case 0x00E0:
                 Execute00E0();
                 break;
+            case 0x00EE:
+                Execute00Ee();
+                break;
         }
     }
 
@@ -85,8 +94,19 @@ public class Emulator
         FrameBuffer = new bool[32, 64];
     }
 
+    private void Execute00Ee()
+    {
+        _pc = _stack.Pop();
+    }
+
     private void Execute1Nnn(ushort nnn)
     {
+        _pc = nnn;
+    }
+
+    private void Execute2Nnn(ushort nnn)
+    {
+        _stack.Push(_pc);
         _pc = nnn;
     }
 
