@@ -32,8 +32,8 @@ public class Emulator
 
     private uint FetchOpcode()
     {
-        var opcode = (uint)_memory[_pc] << 8 | _memory[_pc + 1];
-        _pc++;
+        var opcode = (uint)(_memory[_pc] << 8 | _memory[_pc + 1]);
+        _pc += 2;
         
         return opcode;
     }
@@ -50,6 +50,9 @@ public class Emulator
         {
             case 0x0000:
                 Decode0(opcode);
+                break;
+            case 0x1000:
+                Execute1Nnn(nnn);
                 break;
             case 0x6000:
                 Execute6Xnn(x, nn);
@@ -77,6 +80,11 @@ public class Emulator
     private void Execute00E0()
     {
         FrameBuffer = new bool[32, 64];
+    }
+
+    private void Execute1Nnn(ushort nnn)
+    {
+        _pc = nnn;
     }
 
     private void Execute6Xnn(byte x, byte nn)
