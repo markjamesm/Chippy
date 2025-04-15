@@ -115,7 +115,7 @@ public class Emulator
                     break;
                 }
 
-                var currentPixel = (spriteByte >> col) != 0;
+                var currentPixel = (spriteByte & (0x80 >> col)) != 0;
 
                 if (!currentPixel)
                 {
