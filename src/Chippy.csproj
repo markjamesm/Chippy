@@ -12,4 +12,8 @@
               CopyToOutputDirectory="PreserveNewest"
               LinkBase="roms\" />
     </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Raylib-cs" Version="7.0.1" />
+    </ItemGroup>
 </Project>
