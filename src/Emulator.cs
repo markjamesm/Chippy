@@ -80,6 +80,9 @@ public class Emulator
             case 0x7000:
                 Execute7Xnn(x, nn);
                 break;
+            case 0x8000:
+                Decode8Xy0(opcode);
+                break;
             case 0xA000:
                 ExecuteAnnn(nnn);
                 break;
@@ -99,6 +102,31 @@ public class Emulator
                 break;
             case 0x00EE:
                 Execute00Ee();
+                break;
+        }
+    }
+
+    private void Decode8Xy0(uint opcode)
+    {
+        switch (opcode & 0x000F)
+        {
+            case 0x0000:
+                break;
+            case 0x0001:
+                break;
+            case 0x0002:
+                break;
+            case 0x0003:
+                break;
+            case 0x0004:
+                break;
+            case 0x0005:
+                break;
+            case 0x0006:
+                break;
+            case 0x0007:
+                break;
+            case 0x000E:
                 break;
         }
     }
