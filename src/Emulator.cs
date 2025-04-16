@@ -17,7 +17,6 @@ public class Emulator
     
     private const int ProgramStart = 0x200;
     private const int FontStart = 0;
-    
     public bool[,] FrameBuffer { get; private set; } = new bool[32, 64];
     
     public Emulator(string romPath)
@@ -83,8 +82,17 @@ public class Emulator
             case 0x8000:
                 Decode8Xy0(opcode, x, y);
                 break;
+            case 0x9000:
+                Execute9Xy0(x, y);
+                break;
             case 0xA000:
                 ExecuteAnnn(nnn);
+                break;
+            case 0xB000:
+                ExecuteBnnn(nnn);
+                break;
+            case 0xC000:
+                ExecuteCxnn(x, nn);
                 break;
             case 0xD000:
                 ExecuteDxyn(x, y, n);
@@ -227,9 +235,28 @@ public class Emulator
         _v[0xF] = result >= 0 ? (byte)1 : (byte)0;
     }
 
+    private void Execute9Xy0(byte x, byte y)
+    {
+        if (_v[x] != _v[y])
+        {
+            _pc += 2;
+        }
+    }
+
     private void ExecuteAnnn(ushort nnn)
     {
         _i = nnn;
+    }
+
+    private void ExecuteBnnn(ushort nnn)
+    {
+        _pc = nnn + _v[0];
+    }
+
+    private void ExecuteCxnn(byte x, byte nn)
+    {
+        var random = (byte)Random.Shared.Next(0, 256);
+        _v[x] = (byte)(random & nn);
     }
 
     private void ExecuteDxyn(byte x, byte y, byte n)
