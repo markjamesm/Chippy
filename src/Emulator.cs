@@ -122,8 +122,10 @@ public class Emulator
                 Execute8Xy3(x, y);
                 break;
             case 0x0004:
+                Execute8Xy4(x, y);
                 break;
             case 0x0005:
+                Execute8Xy5(x, y);
                 break;
             case 0x0006:
                 break;
@@ -207,6 +209,22 @@ public class Emulator
     private void Execute8Xy3(byte x, byte y)
     {
         _v[x] ^= _v[y];
+    }
+    
+    private void Execute8Xy4(byte x, byte y)
+    {
+        var result = _v[x] + _v[y];
+        
+        _v[x] = (byte)result;
+
+        _v[0xF] = result > 255 ? (byte)1 : (byte)0;
+    }
+    
+    private void Execute8Xy5(byte x, byte y)
+    {
+        var result = _v[x] - _v[y];
+        _v[x] = (byte)result;
+        _v[0xF] = result >= 0 ? (byte)1 : (byte)0;
     }
 
     private void ExecuteAnnn(ushort nnn)
