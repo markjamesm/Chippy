@@ -81,7 +81,7 @@ public class Emulator
                 Execute7Xnn(x, nn);
                 break;
             case 0x8000:
-                Decode8Xy0(opcode);
+                Decode8Xy0(opcode, x, y);
                 break;
             case 0xA000:
                 ExecuteAnnn(nnn);
@@ -89,7 +89,6 @@ public class Emulator
             case 0xD000:
                 ExecuteDxyn(x, y, n);
                 break;
-                
         }
     }
 
@@ -106,17 +105,21 @@ public class Emulator
         }
     }
 
-    private void Decode8Xy0(uint opcode)
+    private void Decode8Xy0(uint opcode, byte x, byte y)
     {
         switch (opcode & 0x000F)
         {
             case 0x0000:
+                Execute8Xy0(x, y);
                 break;
             case 0x0001:
+                Execute8Xy1(x, y);
                 break;
             case 0x0002:
+                Execute8Xy2(x, y);
                 break;
             case 0x0003:
+                Execute8Xy3(x, y);
                 break;
             case 0x0004:
                 break;
@@ -184,6 +187,26 @@ public class Emulator
     private void Execute7Xnn(byte x, byte nn)
     {
         _v[x] += nn;
+    }
+
+    private void Execute8Xy0(byte x, byte y)
+    {
+        _v[x] = _v[y];
+    }
+
+    private void Execute8Xy1(byte x, byte y)
+    {
+        _v[x] |= _v[y];
+    }
+    
+    private void Execute8Xy2(byte x, byte y)
+    {
+        _v[x] &= _v[y];
+    }
+    
+    private void Execute8Xy3(byte x, byte y)
+    {
+        _v[x] ^= _v[y];
     }
 
     private void ExecuteAnnn(ushort nnn)
