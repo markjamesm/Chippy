@@ -56,7 +56,7 @@ public class Emulator
         switch (opcode & 0xF000)
         {
             case 0x0000:
-                Decode0(opcode);
+                Decode0000(opcode);
                 break;
             case 0x1000:
                 Execute1Nnn(nnn);
@@ -80,7 +80,7 @@ public class Emulator
                 Execute7Xnn(x, nn);
                 break;
             case 0x8000:
-                Decode8Xy0(opcode, x, y);
+                Decode8000(opcode, x, y);
                 break;
             case 0x9000:
                 Execute9Xy0(x, y);
@@ -97,10 +97,13 @@ public class Emulator
             case 0xD000:
                 ExecuteDxyn(x, y, n);
                 break;
+            case 0xF000:
+                DecodeFx00(opcode, x);
+                break;
         }
     }
 
-    private void Decode0(uint opcode)
+    private void Decode0000(uint opcode)
     {
         switch (opcode & 0x0FFF)
         {
@@ -113,7 +116,7 @@ public class Emulator
         }
     }
 
-    private void Decode8Xy0(uint opcode, byte x, byte y)
+    private void Decode8000(uint opcode, byte x, byte y)
     {
         switch (opcode & 0x000F)
         {
@@ -140,6 +143,25 @@ public class Emulator
             case 0x0007:
                 break;
             case 0x000E:
+                break;
+        }
+    }
+
+    private void DecodeFx00(uint opcode, byte x)
+    {
+        switch (opcode & 0x00FF)
+        {
+            case 0x001E:
+                ExecuteFx1E(x);
+                break;
+            case 0x0029:
+                ExecuteFx29(x);
+                break;
+            case 0x0033:
+                break;
+            case 0x0055:
+                break;
+            case 0x0065:
                 break;
         }
     }
@@ -304,5 +326,15 @@ public class Emulator
                 FrameBuffer[yCoord + row, xCoord + col] ^= true;
             }
         }
+    }
+
+    private void ExecuteFx1E(byte x)
+    {
+        _i += _v[x];
+    }
+
+    private void ExecuteFx29(byte x)
+    {
+        _i = _memory[_v[x]];
     }
 }
