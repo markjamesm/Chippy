@@ -32,7 +32,8 @@ public static class RomLoader
             Console.WriteLine("1 - CHIP-8 Splash Screen");
             Console.WriteLine("2 - IBM Logo");
             Console.WriteLine("3 - Corax+ Opcode Test");
-            Console.WriteLine("4 - Exit Chippy\n");
+            Console.WriteLine("4 - Flags Test");
+            Console.WriteLine("5 - Exit Chippy\n");
             Console.Write("Enter your choice: ");
 
             var romChoice = Console.ReadLine();
@@ -46,6 +47,8 @@ public static class RomLoader
                 case "3":
                     return romDirectory + "corax+.ch8";
                 case "4":
+                    return romDirectory + "flags.ch8";
+                case "5":
                     Console.WriteLine("Exiting Chippy...");
                     Environment.Exit(0);
                     break;
