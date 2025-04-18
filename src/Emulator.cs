@@ -6,19 +6,19 @@ public class Emulator
 
     // Data registers
     private byte[] _v = new byte[16];
-    
+
     // Address register
     private ushort _i = 0;
 
     // Program counter, start at program memory.
     private int _pc = 0x200;
-    
+
     private Stack<int> _stack = new(16);
-    
+
     private const int ProgramStart = 0x200;
     private const int FontStart = 0;
     public bool[,] FrameBuffer { get; private set; } = new bool[32, 64];
-    
+
     public Emulator(string romPath)
     {
         var romStream = File.ReadAllBytes(romPath);
@@ -36,7 +36,7 @@ public class Emulator
     {
         var opcode = (uint)(_memory[_pc] << 8 | _memory[_pc + 1]);
         _pc += 2;
-        
+
         return opcode;
     }
 
@@ -45,11 +45,11 @@ public class Emulator
         // x & y refer to registers
         var x = (byte)((opcode & 0x0F00) >> 8);
         var y = (byte)((opcode & 0x00F0) >> 4);
-        
+
         // n: hex bite, nn: hex nibble
         var n = (byte)(opcode & 0x000F);
         var nn = (byte)(opcode & 0x00FF);
-        
+
         // nnn refers to a hexadecimal memory address.
         var nnn = (ushort)(opcode & 0x0FFF);
 
@@ -158,10 +158,13 @@ public class Emulator
                 ExecuteFx29(x);
                 break;
             case 0x0033:
+                ExecuteFx33(x);
                 break;
             case 0x0055:
+                ExecuteFx55(x);
                 break;
             case 0x0065:
+                ExecuteFx65(x);
                 break;
         }
     }
@@ -230,26 +233,26 @@ public class Emulator
     {
         _v[x] |= _v[y];
     }
-    
+
     private void Execute8Xy2(byte x, byte y)
     {
         _v[x] &= _v[y];
     }
-    
+
     private void Execute8Xy3(byte x, byte y)
     {
         _v[x] ^= _v[y];
     }
-    
+
     private void Execute8Xy4(byte x, byte y)
     {
         var result = _v[x] + _v[y];
-        
+
         _v[x] = (byte)result;
 
         _v[0xF] = result > 255 ? (byte)1 : (byte)0;
     }
-    
+
     private void Execute8Xy5(byte x, byte y)
     {
         var result = _v[x] - _v[y];
@@ -288,14 +291,14 @@ public class Emulator
         var yCoord = _v[y] % 32;
 
         _v[0xF] = 0;
-        
+
         for (var row = 0; row < n; row++)
         {
             if (row + yCoord >= 32)
             {
                 break;
             }
-            
+
             var spriteByte = _memory[_i + row];
 
             // CHIP-8 sprites are always a byte, so we can always
@@ -313,7 +316,7 @@ public class Emulator
                 {
                     continue;
                 }
-                
+
                 var screenPixel = FrameBuffer[yCoord + row, xCoord + col];
 
                 if (currentPixel && screenPixel)
@@ -336,5 +339,30 @@ public class Emulator
     private void ExecuteFx29(byte x)
     {
         _i = _memory[_v[x]];
+    }
+
+    private void ExecuteFx33(byte x)
+    {
+        _memory[_i] = (byte)(_v[x] / 100);
+        _memory[_i + 1] = (byte)(_v[x] / 10 % 10);
+        _memory[_i + 2] = (byte)(_v[x] % 10);
+    }
+
+    // Save registers to memory
+    private void ExecuteFx55(byte x)
+    {
+        for (var register = 0; register <= x; register++)
+        {
+            _memory[_i + register] = _v[register];
+        }
+    }
+
+    // Load registers to memory
+    private void ExecuteFx65(byte x)
+    {
+        for (var register = 0; register <= x; register++)
+        {
+            _v[register] = _memory[_i + register];
+        }
     }
 }
