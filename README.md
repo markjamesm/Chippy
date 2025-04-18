@@ -7,6 +7,7 @@ Chippy is a [CHIP-8](https://en.wikipedia.org/wiki/CHIP-8) emulator (technically
 Chippy currently passes the following tests from the [CHIP-8 test suite](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file):
 
 - [CHIP-8 Splash Screen](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file#chip-8-splash-screen): ✅
+- [IBM Logo](https://github.com/Timendus/chip8-test-suite#ibm-logo)
 - [Corax+ Opcode Test](https://github.com/Timendus/chip8-test-suite#corax-opcode-test): ✅
 
 ## Instructions
