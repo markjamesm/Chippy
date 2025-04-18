@@ -139,10 +139,13 @@ public class Emulator
                 Execute8Xy5(x, y);
                 break;
             case 0x0006:
+                Execute8Xy6(x, y);
                 break;
             case 0x0007:
+                Execute8Xy7(x, y);
                 break;
             case 0x000E:
+                Execute8Xye(x, y);
                 break;
         }
     }
@@ -258,6 +261,29 @@ public class Emulator
         var result = _v[x] - _v[y];
         _v[x] = (byte)result;
         _v[0xF] = result >= 0 ? (byte)1 : (byte)0;
+    }
+    
+    // Verify this one
+    private void Execute8Xy6(byte x, byte y)
+    {
+        _v[x] = (byte)(_v[y] >> 1);
+        var leastSignificantBit = (byte)((_v[x] >> 1) & 1);
+        _v[0xF] = leastSignificantBit;
+    }
+    
+    private void Execute8Xy7(byte x, byte y)
+    {
+        var result = _v[y] - _v[x];
+        _v[x] = (byte)result;
+        _v[0xF] = result >= 0 ? (byte)1 : (byte)0;
+    }
+
+    // Verify this one
+    private void Execute8Xye(byte x, byte y)
+    {
+        _v[x] = (byte)(_v[y] << 1);
+        var bitShiftedOut = (byte)((_v[x] << 1) & 8);
+        _v[0xF] = bitShiftedOut;
     }
 
     private void Execute9Xy0(byte x, byte y)
