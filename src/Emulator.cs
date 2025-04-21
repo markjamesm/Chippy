@@ -2,18 +2,18 @@ namespace Chippy;
 
 public class Emulator
 {
-    private byte[] _memory = new byte[4096];
+    private readonly byte[] _memory = new byte[4096];
 
     // Data registers
-    private byte[] _v = new byte[16];
+    private readonly byte[] _v = new byte[16];
 
     // Address register
-    private ushort _i = 0;
+    private ushort _i;
 
     // Program counter, start at program memory.
     private int _pc = 0x200;
 
-    private Stack<int> _stack = new(16);
+    private readonly Stack<int> _stack = new(16);
 
     private const int ProgramStart = 0x200;
     private const int FontStart = 0;
@@ -40,6 +40,7 @@ public class Emulator
         return opcode;
     }
 
+    #region Decode
     private void Decode(uint opcode)
     {
         // x & y refer to registers
@@ -171,7 +172,10 @@ public class Emulator
                 break;
         }
     }
+    
+    #endregion
 
+    #region Execute
     private void Execute00E0()
     {
         FrameBuffer = new bool[32, 64];
@@ -389,4 +393,6 @@ public class Emulator
             _v[register] = _memory[_i + register];
         }
     }
+    
+    #endregion
 }
