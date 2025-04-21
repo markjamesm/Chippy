@@ -263,12 +263,11 @@ public class Emulator
         _v[0xF] = result >= 0 ? (byte)1 : (byte)0;
     }
     
-    // Verify this one
     private void Execute8Xy6(byte x, byte y)
     {
+        var bitShiftedOut = (byte)(_v[y] & 0x1);
         _v[x] = (byte)(_v[y] >> 1);
-        var leastSignificantBit = (byte)((_v[x] >> 1) & 1);
-        _v[0xF] = leastSignificantBit;
+        _v[0xF] = bitShiftedOut;
     }
     
     private void Execute8Xy7(byte x, byte y)
@@ -277,12 +276,11 @@ public class Emulator
         _v[x] = (byte)result;
         _v[0xF] = result >= 0 ? (byte)1 : (byte)0;
     }
-
-    // Verify this one
+    
     private void Execute8Xye(byte x, byte y)
     {
+        var bitShiftedOut = (byte)(_v[y] >> 7);
         _v[x] = (byte)(_v[y] << 1);
-        var bitShiftedOut = (byte)((_v[x] << 1) & 8);
         _v[0xF] = bitShiftedOut;
     }
 
