@@ -56,51 +56,21 @@ public class Emulator
 
         switch (opcode & 0xF000)
         {
-            case 0x0000:
-                Decode0000(opcode);
-                break;
-            case 0x1000:
-                Execute1Nnn(nnn);
-                break;
-            case 0x2000:
-                Execute2Nnn(nnn);
-                break;
-            case 0x3000:
-                Execute3Xnn(x, nn);
-                break;
-            case 0x4000:
-                Execute4Xnn(x, nn);
-                break;
-            case 0x5000:
-                Execute5Xy0(x, y);
-                break;
-            case 0x6000:
-                Execute6Xnn(x, nn);
-                break;
-            case 0x7000:
-                Execute7Xnn(x, nn);
-                break;
-            case 0x8000:
-                Decode8000(opcode, x, y);
-                break;
-            case 0x9000:
-                Execute9Xy0(x, y);
-                break;
-            case 0xA000:
-                ExecuteAnnn(nnn);
-                break;
-            case 0xB000:
-                ExecuteBnnn(nnn);
-                break;
-            case 0xC000:
-                ExecuteCxnn(x, nn);
-                break;
-            case 0xD000:
-                ExecuteDxyn(x, y, n);
-                break;
-            case 0xF000:
-                DecodeFx00(opcode, x);
-                break;
+            case 0x0000: Decode0000(opcode); break;
+            case 0x1000: Execute1Nnn(nnn); break;
+            case 0x2000: Execute2Nnn(nnn); break;
+            case 0x3000: Execute3Xnn(x, nn); break;
+            case 0x4000: Execute4Xnn(x, nn); break;
+            case 0x5000: Execute5Xy0(x, y); break;
+            case 0x6000: Execute6Xnn(x, nn); break;
+            case 0x7000: Execute7Xnn(x, nn); break;
+            case 0x8000: Decode8000(opcode, x, y); break;
+            case 0x9000: Execute9Xy0(x, y); break;
+            case 0xA000: ExecuteAnnn(nnn); break;
+            case 0xB000: ExecuteBnnn(nnn); break;
+            case 0xC000: ExecuteCxnn(x, nn); break;
+            case 0xD000: ExecuteDxyn(x, y, n); break;
+            case 0xF000: DecodeFx00(opcode, x); break;
         }
     }
 
@@ -108,12 +78,8 @@ public class Emulator
     {
         switch (opcode & 0x0FFF)
         {
-            case 0x00E0:
-                Execute00E0();
-                break;
-            case 0x00EE:
-                Execute00Ee();
-                break;
+            case 0x00E0: Execute00E0(); break;
+            case 0x00EE: Execute00Ee(); break;
         }
     }
 
@@ -121,33 +87,15 @@ public class Emulator
     {
         switch (opcode & 0x000F)
         {
-            case 0x0000:
-                Execute8Xy0(x, y);
-                break;
-            case 0x0001:
-                Execute8Xy1(x, y);
-                break;
-            case 0x0002:
-                Execute8Xy2(x, y);
-                break;
-            case 0x0003:
-                Execute8Xy3(x, y);
-                break;
-            case 0x0004:
-                Execute8Xy4(x, y);
-                break;
-            case 0x0005:
-                Execute8Xy5(x, y);
-                break;
-            case 0x0006:
-                Execute8Xy6(x, y);
-                break;
-            case 0x0007:
-                Execute8Xy7(x, y);
-                break;
-            case 0x000E:
-                Execute8Xye(x, y);
-                break;
+            case 0x0000: Execute8Xy0(x, y); break;
+            case 0x0001: Execute8Xy1(x, y); break;
+            case 0x0002: Execute8Xy2(x, y); break;
+            case 0x0003: Execute8Xy3(x, y); break;
+            case 0x0004: Execute8Xy4(x, y); break;
+            case 0x0005: Execute8Xy5(x, y); break;
+            case 0x0006: Execute8Xy6(x, y); break;
+            case 0x0007: Execute8Xy7(x, y); break;
+            case 0x000E: Execute8Xye(x, y); break;
         }
     }
 
@@ -155,21 +103,11 @@ public class Emulator
     {
         switch (opcode & 0x00FF)
         {
-            case 0x001E:
-                ExecuteFx1E(x);
-                break;
-            case 0x0029:
-                ExecuteFx29(x);
-                break;
-            case 0x0033:
-                ExecuteFx33(x);
-                break;
-            case 0x0055:
-                ExecuteFx55(x);
-                break;
-            case 0x0065:
-                ExecuteFx65(x);
-                break;
+            case 0x001E: ExecuteFx1E(x); break;
+            case 0x0029: ExecuteFx29(x); break;
+            case 0x0033: ExecuteFx33(x); break;
+            case 0x0055: ExecuteFx55(x); break;
+            case 0x0065: ExecuteFx65(x); break;
         }
     }
     
