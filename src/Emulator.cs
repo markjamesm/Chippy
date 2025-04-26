@@ -114,21 +114,11 @@ public class Emulator
     #endregion
 
     #region Execute
-    private void Execute00E0()
-    {
-        FrameBuffer = new bool[32, 64];
-    }
-
-    private void Execute00Ee()
-    {
-        _pc = _stack.Pop();
-    }
-
-    private void Execute1Nnn(ushort nnn)
-    {
-        _pc = nnn;
-    }
-
+    
+    private void Execute00E0() => FrameBuffer = new bool[32, 64];
+    private void Execute00Ee() => _pc = _stack.Pop();
+    private void Execute1Nnn(ushort nnn) => _pc = nnn;
+    
     private void Execute2Nnn(ushort nnn)
     {
         _stack.Push(_pc);
@@ -159,35 +149,12 @@ public class Emulator
         }
     }
 
-    private void Execute6Xnn(byte x, byte nn)
-    {
-        _v[x] = nn;
-    }
-
-    private void Execute7Xnn(byte x, byte nn)
-    {
-        _v[x] += nn;
-    }
-
-    private void Execute8Xy0(byte x, byte y)
-    {
-        _v[x] = _v[y];
-    }
-
-    private void Execute8Xy1(byte x, byte y)
-    {
-        _v[x] |= _v[y];
-    }
-
-    private void Execute8Xy2(byte x, byte y)
-    {
-        _v[x] &= _v[y];
-    }
-
-    private void Execute8Xy3(byte x, byte y)
-    {
-        _v[x] ^= _v[y];
-    }
+    private void Execute6Xnn(byte x, byte nn) => _v[x] = nn;
+    private void Execute7Xnn(byte x, byte nn) =>_v[x] += nn;
+    private void Execute8Xy0(byte x, byte y) => _v[x] = _v[y];
+    private void Execute8Xy1(byte x, byte y) => _v[x] |= _v[y];
+    private void Execute8Xy2(byte x, byte y) => _v[x] &= _v[y];
+    private void Execute8Xy3(byte x, byte y) => _v[x] ^= _v[y];
 
     private void Execute8Xy4(byte x, byte y)
     {
@@ -234,15 +201,8 @@ public class Emulator
         }
     }
 
-    private void ExecuteAnnn(ushort nnn)
-    {
-        _i = nnn;
-    }
-
-    private void ExecuteBnnn(ushort nnn)
-    {
-        _pc = nnn + _v[0];
-    }
+    private void ExecuteAnnn(ushort nnn) => _i = nnn;
+    private void ExecuteBnnn(ushort nnn) => _pc = nnn + _v[0];
 
     private void ExecuteCxnn(byte x, byte nn)
     {
@@ -297,15 +257,9 @@ public class Emulator
         }
     }
 
-    private void ExecuteFx1E(byte x)
-    {
-        _i += _v[x];
-    }
+    private void ExecuteFx1E(byte x) => _i += _v[x];
 
-    private void ExecuteFx29(byte x)
-    {
-        _i = _memory[_v[x]];
-    }
+    private void ExecuteFx29(byte x) => _i = _memory[_v[x]];
 
     private void ExecuteFx33(byte x)
     {
