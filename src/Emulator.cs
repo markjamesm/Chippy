@@ -14,6 +14,7 @@ public class Emulator
     private int _pc = 0x200;
 
     private byte _delayTimer;
+    private byte _soundTimer;
 
     private readonly Stack<int> _stack = new(16);
 
@@ -28,6 +29,18 @@ public class Emulator
             if (_delayTimer > 0)
             {
                 _delayTimer = value;
+            }
+        }
+    }
+
+    public byte SoundTimer
+    {
+        get => _soundTimer;
+        set
+        {
+            if (_soundTimer > 0)
+            {
+                _soundTimer = value;
             }
         }
     }
