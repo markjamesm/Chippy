@@ -12,6 +12,7 @@ class Program
 
         while (true)
         {
+            emulator.DelayTimer -= 1;
             emulator.Cycle();
             display.Render(emulator.FrameBuffer);
             Thread.Sleep(16);
