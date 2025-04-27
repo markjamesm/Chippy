@@ -11,6 +11,9 @@
         <None Include="$(SolutionDir)roms\**"
               CopyToOutputDirectory="PreserveNewest"
               LinkBase="roms\" />
+        <None Include="$(SolutionDir)sounds\**"
+              CopyToOutputDirectory="PreserveNewest"
+              LinkBase="sounds\" />
     </ItemGroup>
 
     <ItemGroup>
