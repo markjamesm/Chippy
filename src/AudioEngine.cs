@@ -9,7 +9,7 @@ public class AudioEngine
     public AudioEngine()
     {
         Raylib.InitAudioDevice();
-        _beep = Raylib.LoadSound("sounds/beep1.wav");
+        _beep = Raylib.LoadSound("sounds/beep.wav");
     }
 
     public void Beep() => Raylib.PlaySound(_beep);
