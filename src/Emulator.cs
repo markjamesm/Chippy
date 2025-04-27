@@ -15,6 +15,8 @@ public class Emulator
 
     private readonly Stack<int> _stack = new(16);
 
+    private byte _delayTimer = 60;
+
     private const int ProgramStart = 0x200;
     private const int FontStart = 0;
     public bool[,] FrameBuffer { get; private set; } = new bool[32, 64];
@@ -103,6 +105,7 @@ public class Emulator
     {
         switch (opcode & 0x00FF)
         {
+            case 0x0015: ExecuteFx07(x); break;
             case 0x001E: ExecuteFx1E(x); break;
             case 0x0029: ExecuteFx29(x); break;
             case 0x0033: ExecuteFx33(x); break;
@@ -256,6 +259,8 @@ public class Emulator
             }
         }
     }
+
+    private void ExecuteFx07(byte x) => _v[x] = _delayTimer;
 
     private void ExecuteFx1E(byte x) => _i += _v[x];
 
