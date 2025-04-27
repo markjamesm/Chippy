@@ -14,6 +14,9 @@ public class Emulator
     private int _pc = 0x200;
     
     private readonly Stack<int> _stack = new(16);
+    
+    private readonly AudioEngine _audioEngine;
+    private readonly Display _display;
 
     private const int ProgramStart = 0x200;
     private const int FontStart = 0;
@@ -22,14 +25,62 @@ public class Emulator
     public byte SoundTimer { get; set; }
     public bool[,] FrameBuffer { get; private set; } = new bool[32, 64];
 
-    public Emulator(string romPath)
+    public Emulator(string romPath, AudioEngine audioEngine, Display display)
     {
+        _audioEngine = audioEngine;
+        _display = display;
+        
         var romStream = File.ReadAllBytes(romPath);
         romStream.CopyTo(_memory, ProgramStart);
         FontSet.Fonts.CopyTo(_memory, FontStart);
     }
 
-    public void Cycle()
+    public void Start()
+    {
+        while (true)
+        {
+            if (DelayTimer > 0)
+            {
+                DelayTimer -= 1;
+            }
+
+            if (SoundTimer > 0)
+            {
+                SoundTimer -= 1;
+            }
+            
+            Console.WriteLine($"SoundTimer after decrement: {SoundTimer}");
+
+            switch (SoundTimer)
+            {
+                case > 0: _audioEngine.Beep(); break;
+                case <= 0: _audioEngine.StopBeep(); break;
+            }
+
+            for (var i = 0; i < 11; i++)
+            {
+                Cycle();    
+            }
+            
+            // Fx18 controls the sound timer state at runtime, so the
+            // value could change at any time during the instruction loop.
+            // it might initiate audio or stop it prematurely. so this
+            // check must happen again after the instruction loop and
+            // before the delay.
+            switch (SoundTimer)
+            {
+                case > 0: _audioEngine.Beep(); break;
+                case <= 0: _audioEngine.StopBeep(); break;
+            }
+            
+            Console.WriteLine($"SoundTimer after loop: {SoundTimer}");
+            
+            _display.Render(FrameBuffer);
+            Thread.Sleep(16);
+        }
+    }
+
+    private void Cycle()
     {
         var opcode = FetchOpcode();
         Decode(opcode);
@@ -265,8 +316,12 @@ public class Emulator
 
     private void ExecuteFx07(byte x) => _v[x] = DelayTimer;
     private void ExecuteFx15(byte x) => DelayTimer = _v[x];
-    
-    private void ExecuteFx18(byte x) => SoundTimer = _v[x];
+
+    private void ExecuteFx18(byte x)
+    {
+        SoundTimer = _v[x];
+      //  Console.WriteLine($"_v[x]: {_v[x]:X}");
+    }
 
     private void ExecuteFx1E(byte x) => _i += _v[x];
 

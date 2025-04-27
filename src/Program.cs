@@ -7,15 +7,10 @@ class Program
     static void Main(string[] args)
     {
         var rom = RomLoader.Load();
-        var emulator = new Emulator(rom);
+        var audioEngine = new AudioEngine();
         var display = new Display();
-
-        while (true)
-        {
-            emulator.DelayTimer -= 1;
-            emulator.Cycle();
-            display.Render(emulator.FrameBuffer);
-            Thread.Sleep(16);
-        }
+        var emulator = new Emulator(rom, audioEngine, display);
+        
+        emulator.Start();
     }
 }

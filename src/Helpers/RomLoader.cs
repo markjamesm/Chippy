@@ -33,7 +33,8 @@ public static class RomLoader
             Console.WriteLine("2 - IBM Logo");
             Console.WriteLine("3 - Corax+ Opcode Test");
             Console.WriteLine("4 - Flags Test");
-            Console.WriteLine("5 - Exit Chippy\n");
+            Console.WriteLine("5 - Beep Test");
+            Console.WriteLine("6 - Exit Chippy\n");
             Console.Write("Enter your choice: ");
 
             var romChoice = Console.ReadLine();
@@ -49,6 +50,8 @@ public static class RomLoader
                 case "4":
                     return romDirectory + "flags.ch8";
                 case "5":
+                    return romDirectory + "beep-test.ch8";
+                case "6":
                     Console.WriteLine("Exiting Chippy...");
                     Environment.Exit(0);
                     break;
