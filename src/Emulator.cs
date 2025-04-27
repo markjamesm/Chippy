@@ -13,12 +13,25 @@ public class Emulator
     // Program counter, start at program memory.
     private int _pc = 0x200;
 
-    private readonly Stack<int> _stack = new(16);
+    private byte _delayTimer;
 
-    private byte _delayTimer = 60;
+    private readonly Stack<int> _stack = new(16);
 
     private const int ProgramStart = 0x200;
     private const int FontStart = 0;
+    
+    public byte DelayTimer
+    {
+        get => _delayTimer;
+        set
+        {
+            if (_delayTimer > 0)
+            {
+                _delayTimer = value;
+            }
+        }
+    }
+    
     public bool[,] FrameBuffer { get; private set; } = new bool[32, 64];
 
     public Emulator(string romPath)
@@ -261,8 +274,8 @@ public class Emulator
         }
     }
 
-    private void ExecuteFx07(byte x) => _v[x] = _delayTimer;
-    private void ExecuteFx15(byte x) => _delayTimer = _v[x];
+    private void ExecuteFx07(byte x) => _v[x] = DelayTimer;
+    private void ExecuteFx15(byte x) => DelayTimer = _v[x];
 
     private void ExecuteFx1E(byte x) => _i += _v[x];
 
