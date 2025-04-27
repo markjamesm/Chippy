@@ -14,7 +14,6 @@ public class Emulator
     private int _pc = 0x200;
     
     private readonly Stack<int> _stack = new(16);
-    
     private readonly AudioEngine _audioEngine;
     private readonly Display _display;
 
@@ -48,8 +47,6 @@ public class Emulator
             {
                 SoundTimer -= 1;
             }
-            
-            Console.WriteLine($"SoundTimer after decrement: {SoundTimer}");
 
             switch (SoundTimer)
             {
@@ -57,6 +54,8 @@ public class Emulator
                 case <= 0: _audioEngine.StopBeep(); break;
             }
 
+            // Default to 11 instructions per frame but should
+            // make this adjustable 
             for (var i = 0; i < 11; i++)
             {
                 Cycle();    
@@ -72,8 +71,6 @@ public class Emulator
                 case > 0: _audioEngine.Beep(); break;
                 case <= 0: _audioEngine.StopBeep(); break;
             }
-            
-            Console.WriteLine($"SoundTimer after loop: {SoundTimer}");
             
             _display.Render(FrameBuffer);
             Thread.Sleep(16);
@@ -124,6 +121,7 @@ public class Emulator
             case 0xB000: ExecuteBnnn(nnn); break;
             case 0xC000: ExecuteCxnn(x, nn); break;
             case 0xD000: ExecuteDxyn(x, y, n); break;
+            case 0xE000: DecodeEx00(opcode, x); break;
             case 0xF000: DecodeFx00(opcode, x); break;
         }
     }
@@ -150,6 +148,14 @@ public class Emulator
             case 0x0006: Execute8Xy6(x, y); break;
             case 0x0007: Execute8Xy7(x, y); break;
             case 0x000E: Execute8Xye(x, y); break;
+        }
+    }
+
+    private void DecodeEx00(uint opcode, byte x)
+    {
+        switch (opcode & 0x00F0)
+        {
+            case 0x00A0: ExecuteExA1(x); break;
         }
     }
 
@@ -314,13 +320,19 @@ public class Emulator
         }
     }
 
+    // This needs to be implemented properly once user input
+    // logic is handled.
+    private void ExecuteExA1(byte x)
+    {
+        _pc += 2;
+    }
+
     private void ExecuteFx07(byte x) => _v[x] = DelayTimer;
     private void ExecuteFx15(byte x) => DelayTimer = _v[x];
 
     private void ExecuteFx18(byte x)
     {
         SoundTimer = _v[x];
-      //  Console.WriteLine($"_v[x]: {_v[x]:X}");
     }
 
     private void ExecuteFx1E(byte x) => _i += _v[x];
