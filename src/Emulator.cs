@@ -105,7 +105,8 @@ public class Emulator
     {
         switch (opcode & 0x00FF)
         {
-            case 0x0015: ExecuteFx07(x); break;
+            case 0x0007: ExecuteFx07(x); break;
+            case 0x0015: ExecuteFx15(x); break;
             case 0x001E: ExecuteFx1E(x); break;
             case 0x0029: ExecuteFx29(x); break;
             case 0x0033: ExecuteFx33(x); break;
@@ -261,6 +262,7 @@ public class Emulator
     }
 
     private void ExecuteFx07(byte x) => _v[x] = _delayTimer;
+    private void ExecuteFx15(byte x) => _delayTimer = _v[x];
 
     private void ExecuteFx1E(byte x) => _i += _v[x];
 
