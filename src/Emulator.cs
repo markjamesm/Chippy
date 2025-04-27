@@ -12,39 +12,14 @@ public class Emulator
 
     // Program counter, start at program memory.
     private int _pc = 0x200;
-
-    private byte _delayTimer;
-    private byte _soundTimer;
-
+    
     private readonly Stack<int> _stack = new(16);
 
     private const int ProgramStart = 0x200;
     private const int FontStart = 0;
     
-    public byte DelayTimer
-    {
-        get => _delayTimer;
-        set
-        {
-            if (_delayTimer > 0)
-            {
-                _delayTimer = value;
-            }
-        }
-    }
-
-    public byte SoundTimer
-    {
-        get => _soundTimer;
-        set
-        {
-            if (_soundTimer > 0)
-            {
-                _soundTimer = value;
-            }
-        }
-    }
-    
+    public byte DelayTimer { get; set; }
+    public byte SoundTimer { get; set; }
     public bool[,] FrameBuffer { get; private set; } = new bool[32, 64];
 
     public Emulator(string romPath)
