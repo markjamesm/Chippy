@@ -13,17 +13,17 @@ public class Emulator
     // Program counter, start at program memory.
     private int _pc = 0x200;
     
+    private readonly Stack<int> _stack = new(16);
+    private bool[,] _frameBuffer = new bool[32, 64];
+    
     private byte _soundTimer;
     private byte _delayTimer;
     
-    private readonly Stack<int> _stack = new(16);
     private readonly AudioEngine _audioEngine;
     private readonly Display _display;
 
     private const int ProgramStart = 0x200;
     private const int FontStart = 0;
-    
-    public bool[,] FrameBuffer { get; private set; } = new bool[32, 64];
 
     public Emulator(string romPath, AudioEngine audioEngine, Display display)
     {
@@ -73,7 +73,7 @@ public class Emulator
                 case <= 0: _audioEngine.StopBeep(); break;
             }
             
-            _display.Render(FrameBuffer);
+            _display.Render(_frameBuffer);
             Thread.Sleep(16);
         }
     }
@@ -179,7 +179,7 @@ public class Emulator
 
     #region Execute
     
-    private void Execute00E0() => FrameBuffer = new bool[32, 64];
+    private void Execute00E0() => _frameBuffer = new bool[32, 64];
     private void Execute00Ee() => _pc = _stack.Pop();
     private void Execute1Nnn(ushort nnn) => _pc = nnn;
     
@@ -307,7 +307,7 @@ public class Emulator
                     continue;
                 }
 
-                var screenPixel = FrameBuffer[yCoord + row, xCoord + col];
+                var screenPixel = _frameBuffer[yCoord + row, xCoord + col];
 
                 if (currentPixel && screenPixel)
                 {
@@ -316,7 +316,7 @@ public class Emulator
 
                 // XOR does the same thing as 
                 // Framebuffer[xCoord + col, yCoord + row] = !Framebuffer[xCoord + col, yCoord + row];
-                FrameBuffer[yCoord + row, xCoord + col] ^= true;
+                _frameBuffer[yCoord + row, xCoord + col] ^= true;
             }
         }
     }
