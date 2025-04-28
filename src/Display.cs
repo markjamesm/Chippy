@@ -46,6 +46,76 @@ public class Display
         {
             return ConvertKeypressToScancode(KeyboardKey.Two);
         }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.Three))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.Three);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.Four))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.Four);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.Q))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.Q);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.W))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.W);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.E))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.E);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.R))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.R);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.A))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.A);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.S))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.S);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.D))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.D);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.F))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.F);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.Z))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.Z);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.X))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.X);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.C))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.C);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.V))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.V);
+        }
 
         return null;
     }
