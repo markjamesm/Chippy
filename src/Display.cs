@@ -39,82 +39,82 @@ public class Display
     {
         if (Raylib.IsKeyPressed(KeyboardKey.One))
         {
-            return ConvertKeypressToScancode(KeyboardKey.One);
+            return ConvertKeypressToByte(KeyboardKey.One);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.Two))
         {
-            return ConvertKeypressToScancode(KeyboardKey.Two);
+            return ConvertKeypressToByte(KeyboardKey.Two);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.Three))
         {
-            return ConvertKeypressToScancode(KeyboardKey.Three);
+            return ConvertKeypressToByte(KeyboardKey.Three);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.Four))
         {
-            return ConvertKeypressToScancode(KeyboardKey.Four);
+            return ConvertKeypressToByte(KeyboardKey.Four);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.Q))
         {
-            return ConvertKeypressToScancode(KeyboardKey.Q);
+            return ConvertKeypressToByte(KeyboardKey.Q);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.W))
         {
-            return ConvertKeypressToScancode(KeyboardKey.W);
+            return ConvertKeypressToByte(KeyboardKey.W);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.E))
         {
-            return ConvertKeypressToScancode(KeyboardKey.E);
+            return ConvertKeypressToByte(KeyboardKey.E);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.R))
         {
-            return ConvertKeypressToScancode(KeyboardKey.R);
+            return ConvertKeypressToByte(KeyboardKey.R);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.A))
         {
-            return ConvertKeypressToScancode(KeyboardKey.A);
+            return ConvertKeypressToByte(KeyboardKey.A);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.S))
         {
-            return ConvertKeypressToScancode(KeyboardKey.S);
+            return ConvertKeypressToByte(KeyboardKey.S);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.D))
         {
-            return ConvertKeypressToScancode(KeyboardKey.D);
+            return ConvertKeypressToByte(KeyboardKey.D);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.F))
         {
-            return ConvertKeypressToScancode(KeyboardKey.F);
+            return ConvertKeypressToByte(KeyboardKey.F);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.Z))
         {
-            return ConvertKeypressToScancode(KeyboardKey.Z);
+            return ConvertKeypressToByte(KeyboardKey.Z);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.X))
         {
-            return ConvertKeypressToScancode(KeyboardKey.X);
+            return ConvertKeypressToByte(KeyboardKey.X);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.C))
         {
-            return ConvertKeypressToScancode(KeyboardKey.C);
+            return ConvertKeypressToByte(KeyboardKey.C);
         }
         
         if (Raylib.IsKeyPressed(KeyboardKey.V))
         {
-            return ConvertKeypressToScancode(KeyboardKey.V);
+            return ConvertKeypressToByte(KeyboardKey.V);
         }
 
         return null;
