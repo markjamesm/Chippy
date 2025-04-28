@@ -18,6 +18,8 @@ public class Emulator
     
     private byte _soundTimer;
     private byte _delayTimer;
+
+    private byte? _currentKeypress;
     
     private readonly AudioEngine _audioEngine;
     private readonly Display _display;
@@ -39,11 +41,11 @@ public class Emulator
     {
         while (true)
         {
-            var keyPress = Display.ReadKeys();
+            _currentKeypress = Display.ReadKeys();
             
-            if (keyPress != null)
+            if (_currentKeypress != null)
             {
-                Console.WriteLine($"{keyPress:X}");
+                Console.WriteLine($"{_currentKeypress:X}");
             }
             
             if (_delayTimer > 0)
@@ -81,6 +83,7 @@ public class Emulator
             }
             
             _display.Render(_frameBuffer);
+            _currentKeypress = null;
             Thread.Sleep(16);
         }
     }
