@@ -13,6 +13,8 @@ public class Emulator
     // Program counter, start at program memory.
     private int _pc = 0x200;
     
+    private byte _soundTimer;
+    
     private readonly Stack<int> _stack = new(16);
     private readonly AudioEngine _audioEngine;
     private readonly Display _display;
@@ -21,7 +23,6 @@ public class Emulator
     private const int FontStart = 0;
     
     public byte DelayTimer { get; set; }
-    public byte SoundTimer { get; set; }
     public bool[,] FrameBuffer { get; private set; } = new bool[32, 64];
 
     public Emulator(string romPath, AudioEngine audioEngine, Display display)
@@ -43,12 +44,12 @@ public class Emulator
                 DelayTimer -= 1;
             }
 
-            if (SoundTimer > 0)
+            if (_soundTimer > 0)
             {
-                SoundTimer -= 1;
+                _soundTimer -= 1;
             }
 
-            switch (SoundTimer)
+            switch (_soundTimer)
             {
                 case > 0: _audioEngine.Beep(); break;
                 case <= 0: _audioEngine.StopBeep(); break;
@@ -66,7 +67,7 @@ public class Emulator
             // it might initiate audio or stop it prematurely. so this
             // check must happen again after the instruction loop and
             // before the delay.
-            switch (SoundTimer)
+            switch (_soundTimer)
             {
                 case > 0: _audioEngine.Beep(); break;
                 case <= 0: _audioEngine.StopBeep(); break;
@@ -332,7 +333,7 @@ public class Emulator
 
     private void ExecuteFx18(byte x)
     {
-        SoundTimer = _v[x];
+        _soundTimer = _v[x];
     }
 
     private void ExecuteFx1E(byte x) => _i += _v[x];
