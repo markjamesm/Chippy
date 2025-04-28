@@ -14,6 +14,7 @@ public class Emulator
     private int _pc = 0x200;
     
     private byte _soundTimer;
+    private byte _delayTimer;
     
     private readonly Stack<int> _stack = new(16);
     private readonly AudioEngine _audioEngine;
@@ -22,7 +23,6 @@ public class Emulator
     private const int ProgramStart = 0x200;
     private const int FontStart = 0;
     
-    public byte DelayTimer { get; set; }
     public bool[,] FrameBuffer { get; private set; } = new bool[32, 64];
 
     public Emulator(string romPath, AudioEngine audioEngine, Display display)
@@ -39,9 +39,9 @@ public class Emulator
     {
         while (true)
         {
-            if (DelayTimer > 0)
+            if (_delayTimer > 0)
             {
-                DelayTimer -= 1;
+                _delayTimer -= 1;
             }
 
             if (_soundTimer > 0)
@@ -328,8 +328,8 @@ public class Emulator
         _pc += 2;
     }
 
-    private void ExecuteFx07(byte x) => _v[x] = DelayTimer;
-    private void ExecuteFx15(byte x) => DelayTimer = _v[x];
+    private void ExecuteFx07(byte x) => _v[x] = _delayTimer;
+    private void ExecuteFx15(byte x) => _delayTimer = _v[x];
 
     private void ExecuteFx18(byte x)
     {
