@@ -34,4 +34,29 @@ public class Display
 
         Raylib.EndDrawing();
     }
+    
+    public static byte? ReadKeys()
+    {
+        if (Raylib.IsKeyPressed(KeyboardKey.One))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.One);
+        }
+        
+        if (Raylib.IsKeyPressed(KeyboardKey.Two))
+        {
+            return ConvertKeypressToScancode(KeyboardKey.Two);
+        }
+
+        return null;
+    }
+
+    private static byte ConvertKeypressToScancode(KeyboardKey key)
+    {
+        return key switch
+        {
+            KeyboardKey.One => 0x02,
+            KeyboardKey.Two => 0x03,
+            _ => 0x0
+        };
+    }
 }
