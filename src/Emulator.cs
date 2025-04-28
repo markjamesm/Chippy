@@ -39,6 +39,13 @@ public class Emulator
     {
         while (true)
         {
+            var keyPress = Display.ReadKeys();
+            
+            if (keyPress != null)
+            {
+                Console.WriteLine($"{keyPress:X}");
+            }
+            
             if (_delayTimer > 0)
             {
                 _delayTimer -= 1;
