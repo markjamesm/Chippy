@@ -120,13 +120,27 @@ public class Display
         return null;
     }
 
-    private static byte ConvertKeypressToScancode(KeyboardKey key)
+    private static byte? ConvertKeypressToByte(KeyboardKey key)
     {
         return key switch
         {
-            KeyboardKey.One => 0x02,
-            KeyboardKey.Two => 0x03,
-            _ => 0x0
+            KeyboardKey.One => 0x0,
+            KeyboardKey.Two => 0x1,
+            KeyboardKey.Three => 0x2,
+            KeyboardKey.Four => 0x3,
+            KeyboardKey.Q => 0x4,
+            KeyboardKey.W => 0x5,
+            KeyboardKey.E => 0x6,
+            KeyboardKey.R => 0x7,
+            KeyboardKey.A => 0x8,
+            KeyboardKey.S => 0x9,
+            KeyboardKey.D => 0xA,
+            KeyboardKey.F => 0xB,
+            KeyboardKey.Z => 0xC,
+            KeyboardKey.X => 0xD,
+            KeyboardKey.C => 0xE,
+            KeyboardKey.V => 0xF,
+            _ => null
         };
     }
 }
