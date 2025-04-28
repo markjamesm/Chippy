@@ -1,6 +1,4 @@
-﻿using Chippy.Helpers;
-
-namespace Chippy;
+﻿namespace Chippy;
 
 class Program
 {

@@ -1,4 +1,4 @@
-namespace Chippy.Helpers;
+namespace Chippy;
 
 public static class RomLoader
 {
