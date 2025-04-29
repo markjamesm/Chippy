@@ -18,6 +18,8 @@ public class Emulator
     
     private byte _soundTimer;
     private byte _delayTimer;
+
+    private byte? _currentKeypress;
     
     private readonly AudioEngine _audioEngine;
     private readonly Display _display;
@@ -39,6 +41,13 @@ public class Emulator
     {
         while (true)
         {
+            _currentKeypress = Display.ReadKeys();
+            
+            if (_currentKeypress != null)
+            {
+                Console.WriteLine($"{_currentKeypress:X}");
+            }
+            
             if (_delayTimer > 0)
             {
                 _delayTimer -= 1;
@@ -74,6 +83,7 @@ public class Emulator
             }
             
             _display.Render(_frameBuffer);
+            _currentKeypress = null;
             Thread.Sleep(16);
         }
     }
@@ -156,7 +166,8 @@ public class Emulator
     {
         switch (opcode & 0x00F0)
         {
-            case 0x00A0: ExecuteExA1(x); break;
+            case 0x0090: ExecuteEx9E(); break;
+            case 0x00A0: ExecuteExA1(); break;
         }
     }
 
@@ -165,6 +176,7 @@ public class Emulator
         switch (opcode & 0x00FF)
         {
             case 0x0007: ExecuteFx07(x); break;
+            case 0x000A: ExecuteFx0A(x); break;
             case 0x0015: ExecuteFx15(x); break;
             case 0x0018: ExecuteFx18(x); break;
             case 0x001E: ExecuteFx1E(x); break;
@@ -321,14 +333,33 @@ public class Emulator
         }
     }
 
-    // This needs to be implemented properly once user input
-    // logic is handled.
-    private void ExecuteExA1(byte x)
+    private void ExecuteEx9E()
     {
-        _pc += 2;
+        if (_currentKeypress.HasValue)
+        {
+            _pc += 2;
+        }
+    }
+    
+    private void ExecuteExA1()
+    {
+        if (!_currentKeypress.HasValue)
+        {
+            _pc += 2;
+        }
     }
 
     private void ExecuteFx07(byte x) => _v[x] = _delayTimer;
+
+    private void ExecuteFx0A(byte x)
+    {
+        if (_currentKeypress.HasValue)
+        {
+            _v[x] = _currentKeypress.Value;
+            _currentKeypress = null;
+        }
+    } 
+        
     private void ExecuteFx15(byte x) => _delayTimer = _v[x];
 
     private void ExecuteFx18(byte x)
