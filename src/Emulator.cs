@@ -335,7 +335,9 @@ public class Emulator
 
     private void ExecuteEx9E()
     {
-        if (_currentKeypress.HasValue)
+        var currentKeyPressed = Display.ReadKeys();
+        
+        if (currentKeyPressed.HasValue)
         {
             _pc += 2;
         }
@@ -343,7 +345,9 @@ public class Emulator
     
     private void ExecuteExA1()
     {
-        if (!_currentKeypress.HasValue)
+        var currentKeyPressed = Display.ReadKeys();
+        
+        if (!currentKeyPressed.HasValue)
         {
             _pc += 2;
         }
