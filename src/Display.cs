@@ -37,90 +37,90 @@ public class Display
     
     public static byte? ReadKeys()
     {
-        if (Raylib.IsKeyPressed(KeyboardKey.One))
+        if (Raylib.IsKeyDown(KeyboardKey.One))
         {
-            return ConvertKeypressToByte(KeyboardKey.One);
+            return ConvertKeyToByte(KeyboardKey.One);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.Two))
+        if (Raylib.IsKeyDown(KeyboardKey.Two))
         {
-            return ConvertKeypressToByte(KeyboardKey.Two);
+            return ConvertKeyToByte(KeyboardKey.Two);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.Three))
+        if (Raylib.IsKeyDown(KeyboardKey.Three))
         {
-            return ConvertKeypressToByte(KeyboardKey.Three);
+            return ConvertKeyToByte(KeyboardKey.Three);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.Four))
+        if (Raylib.IsKeyDown(KeyboardKey.Four))
         {
-            return ConvertKeypressToByte(KeyboardKey.Four);
+            return ConvertKeyToByte(KeyboardKey.Four);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.Q))
+        if (Raylib.IsKeyDown(KeyboardKey.Q))
         {
-            return ConvertKeypressToByte(KeyboardKey.Q);
+            return ConvertKeyToByte(KeyboardKey.Q);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.W))
+        if (Raylib.IsKeyDown(KeyboardKey.W))
         {
-            return ConvertKeypressToByte(KeyboardKey.W);
+            return ConvertKeyToByte(KeyboardKey.W);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.E))
+        if (Raylib.IsKeyDown(KeyboardKey.E))
         {
-            return ConvertKeypressToByte(KeyboardKey.E);
+            return ConvertKeyToByte(KeyboardKey.E);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.R))
+        if (Raylib.IsKeyDown(KeyboardKey.R))
         {
-            return ConvertKeypressToByte(KeyboardKey.R);
+            return ConvertKeyToByte(KeyboardKey.R);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.A))
+        if (Raylib.IsKeyDown(KeyboardKey.A))
         {
-            return ConvertKeypressToByte(KeyboardKey.A);
+            return ConvertKeyToByte(KeyboardKey.A);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.S))
+        if (Raylib.IsKeyDown(KeyboardKey.S))
         {
-            return ConvertKeypressToByte(KeyboardKey.S);
+            return ConvertKeyToByte(KeyboardKey.S);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.D))
+        if (Raylib.IsKeyDown(KeyboardKey.D))
         {
-            return ConvertKeypressToByte(KeyboardKey.D);
+            return ConvertKeyToByte(KeyboardKey.D);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.F))
+        if (Raylib.IsKeyDown(KeyboardKey.F))
         {
-            return ConvertKeypressToByte(KeyboardKey.F);
+            return ConvertKeyToByte(KeyboardKey.F);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.Z))
+        if (Raylib.IsKeyDown(KeyboardKey.Z))
         {
-            return ConvertKeypressToByte(KeyboardKey.Z);
+            return ConvertKeyToByte(KeyboardKey.Z);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.X))
+        if (Raylib.IsKeyDown(KeyboardKey.X))
         {
-            return ConvertKeypressToByte(KeyboardKey.X);
+            return ConvertKeyToByte(KeyboardKey.X);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.C))
+        if (Raylib.IsKeyDown(KeyboardKey.C))
         {
-            return ConvertKeypressToByte(KeyboardKey.C);
+            return ConvertKeyToByte(KeyboardKey.C);
         }
         
-        if (Raylib.IsKeyPressed(KeyboardKey.V))
+        if (Raylib.IsKeyDown(KeyboardKey.V))
         {
-            return ConvertKeypressToByte(KeyboardKey.V);
+            return ConvertKeyToByte(KeyboardKey.V);
         }
 
         return null;
     }
 
-    private static byte? ConvertKeypressToByte(KeyboardKey key)
+    private static byte? ConvertKeyToByte(KeyboardKey key)
     {
         return key switch
         {
