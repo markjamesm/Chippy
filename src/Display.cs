@@ -124,21 +124,21 @@ public class Display
     {
         return key switch
         {
-            KeyboardKey.One => 0x0,
-            KeyboardKey.Two => 0x1,
-            KeyboardKey.Three => 0x2,
-            KeyboardKey.Four => 0x3,
+            KeyboardKey.One => 0x1,
+            KeyboardKey.Two => 0x2,
+            KeyboardKey.Three => 0x3,
+            KeyboardKey.Four => 0xC,
             KeyboardKey.Q => 0x4,
             KeyboardKey.W => 0x5,
             KeyboardKey.E => 0x6,
-            KeyboardKey.R => 0x7,
-            KeyboardKey.A => 0x8,
-            KeyboardKey.S => 0x9,
-            KeyboardKey.D => 0xA,
-            KeyboardKey.F => 0xB,
-            KeyboardKey.Z => 0xC,
-            KeyboardKey.X => 0xD,
-            KeyboardKey.C => 0xE,
+            KeyboardKey.R => 0xD,
+            KeyboardKey.A => 0x7,
+            KeyboardKey.S => 0x8,
+            KeyboardKey.D => 0x9,
+            KeyboardKey.F => 0xE,
+            KeyboardKey.Z => 0xA,
+            KeyboardKey.X => 0x0,
+            KeyboardKey.C => 0xB,
             KeyboardKey.V => 0xF,
             _ => null
         };
