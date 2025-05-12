@@ -12,15 +12,16 @@ public class Emulator
 
     // Program counter, start at program memory.
     private int _pc = 0x200;
-    
+
     private readonly Stack<int> _stack = new(16);
     private bool[,] _frameBuffer = new bool[32, 64];
-    
+
     private byte _soundTimer;
     private byte _delayTimer;
 
     private byte? _currentKeypress;
-    
+    private byte? _currentKeyReleased;
+
     private readonly AudioEngine _audioEngine;
     private readonly Display _display;
 
@@ -31,7 +32,7 @@ public class Emulator
     {
         _audioEngine = audioEngine;
         _display = display;
-        
+
         var romStream = File.ReadAllBytes(romPath);
         romStream.CopyTo(_memory, ProgramStart);
         FontSet.Fonts.CopyTo(_memory, FontStart);
@@ -42,7 +43,8 @@ public class Emulator
         while (true)
         {
             _currentKeypress = Display.ReadKeyDown();
-            
+            _currentKeyReleased = Display.ReadKeyUp();
+
             if (_delayTimer > 0)
             {
                 _delayTimer -= 1;
@@ -63,9 +65,9 @@ public class Emulator
             // make this adjustable 
             for (var i = 0; i < 11; i++)
             {
-                Cycle();    
+                Cycle();
             }
-            
+
             // Fx18 controls the sound timer state at runtime, so the
             // value could change at any time during the instruction loop.
             // it might initiate audio or stop it prematurely. so this
@@ -76,9 +78,10 @@ public class Emulator
                 case > 0: _audioEngine.Beep(); break;
                 case <= 0: _audioEngine.StopBeep(); break;
             }
-            
+
             _display.Render(_frameBuffer);
             _currentKeypress = null;
+            _currentKeyReleased = null;
             Thread.Sleep(16);
         }
     }
@@ -98,6 +101,7 @@ public class Emulator
     }
 
     #region Decode
+
     private void Decode(uint opcode)
     {
         // x & y refer to registers
@@ -181,15 +185,15 @@ public class Emulator
             case 0x0065: ExecuteFx65(x); break;
         }
     }
-    
+
     #endregion
 
     #region Execute
-    
+
     private void Execute00E0() => _frameBuffer = new bool[32, 64];
     private void Execute00Ee() => _pc = _stack.Pop();
     private void Execute1Nnn(ushort nnn) => _pc = nnn;
-    
+
     private void Execute2Nnn(ushort nnn)
     {
         _stack.Push(_pc);
@@ -221,7 +225,7 @@ public class Emulator
     }
 
     private void Execute6Xnn(byte x, byte nn) => _v[x] = nn;
-    private void Execute7Xnn(byte x, byte nn) =>_v[x] += nn;
+    private void Execute7Xnn(byte x, byte nn) => _v[x] += nn;
     private void Execute8Xy0(byte x, byte y) => _v[x] = _v[y];
     private void Execute8Xy1(byte x, byte y) => _v[x] |= _v[y];
     private void Execute8Xy2(byte x, byte y) => _v[x] &= _v[y];
@@ -242,21 +246,21 @@ public class Emulator
         _v[x] = (byte)result;
         _v[0xF] = result >= 0 ? (byte)1 : (byte)0;
     }
-    
+
     private void Execute8Xy6(byte x, byte y)
     {
         var bitShiftedOut = (byte)(_v[y] & 0x1);
         _v[x] = (byte)(_v[y] >> 1);
         _v[0xF] = bitShiftedOut;
     }
-    
+
     private void Execute8Xy7(byte x, byte y)
     {
         var result = _v[y] - _v[x];
         _v[x] = (byte)result;
         _v[0xF] = result >= 0 ? (byte)1 : (byte)0;
     }
-    
+
     private void Execute8Xye(byte x, byte y)
     {
         var bitShiftedOut = (byte)(_v[y] >> 7);
@@ -331,7 +335,7 @@ public class Emulator
     private void ExecuteEx9E(byte x)
     {
         var currentKeyPressed = Display.ReadKeyDown();
-        
+
         if (currentKeyPressed.HasValue)
         {
             if (currentKeyPressed.Value == _v[x])
@@ -340,11 +344,11 @@ public class Emulator
             }
         }
     }
-    
+
     private void ExecuteExA1(byte x)
     {
         var currentKeyPressed = Display.ReadKeyDown();
-        
+
         if (currentKeyPressed != _v[x])
         {
             _pc += 2;
@@ -355,13 +359,19 @@ public class Emulator
 
     private void ExecuteFx0A(byte x)
     {
+        if (!_currentKeypress.HasValue)
+        {
+            _pc -= 2;
+        }
+
         if (_currentKeypress.HasValue)
         {
-            _v[x] = _currentKeypress.Value;
-            _currentKeypress = null;
+            if (_currentKeyReleased.HasValue) {
+                _v[x] = _currentKeypress.Value;
+            }
         }
-    } 
-        
+    }
+
     private void ExecuteFx15(byte x) => _delayTimer = _v[x];
 
     private void ExecuteFx18(byte x)
@@ -397,6 +407,6 @@ public class Emulator
             _v[register] = _memory[_i + register];
         }
     }
-    
+
     #endregion
 }
