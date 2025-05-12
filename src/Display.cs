@@ -35,7 +35,7 @@ public class Display
         Raylib.EndDrawing();
     }
     
-    public static byte? ReadKeys()
+    public static byte? ReadKeyDown()
     {
         if (Raylib.IsKeyDown(KeyboardKey.One))
         {

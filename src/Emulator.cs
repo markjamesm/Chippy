@@ -41,7 +41,7 @@ public class Emulator
     {
         while (true)
         {
-            _currentKeypress = Display.ReadKeys();
+            _currentKeypress = Display.ReadKeyDown();
             
             if (_delayTimer > 0)
             {
@@ -330,7 +330,7 @@ public class Emulator
 
     private void ExecuteEx9E(byte x)
     {
-        var currentKeyPressed = Display.ReadKeys();
+        var currentKeyPressed = Display.ReadKeyDown();
         
         if (currentKeyPressed.HasValue)
         {
@@ -343,7 +343,7 @@ public class Emulator
     
     private void ExecuteExA1(byte x)
     {
-        var currentKeyPressed = Display.ReadKeys();
+        var currentKeyPressed = Display.ReadKeyDown();
         
         if (currentKeyPressed != _v[x])
         {
