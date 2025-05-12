@@ -166,7 +166,7 @@ public class Emulator
     {
         switch (opcode & 0x00F0)
         {
-            case 0x0090: ExecuteEx9E(); break;
+            case 0x0090: ExecuteEx9E(x); break;
             case 0x00A0: ExecuteExA1(); break;
         }
     }
@@ -333,13 +333,16 @@ public class Emulator
         }
     }
 
-    private void ExecuteEx9E()
+    private void ExecuteEx9E(byte x)
     {
         var currentKeyPressed = Display.ReadKeys();
         
         if (currentKeyPressed.HasValue)
         {
-            _pc += 2;
+            if (currentKeyPressed.Value == _v[x])
+            {
+                _pc += 2;
+            }
         }
     }
     
