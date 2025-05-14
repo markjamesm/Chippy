@@ -2,11 +2,11 @@
 
 Chippy is a [CHIP-8](https://en.wikipedia.org/wiki/CHIP-8) emulator (technically an interpreter...) written in C# targeting .NET 9. 
 
-Graphics and sound are implemented using the [Raylib C#](https://github.com/raylib-cs/raylib-cs) bindings.
+Graphics and sound are implemented using the [Raylib C# bindings](https://github.com/raylib-cs/raylib-cs).
 
 ## Tests
 
-Chippy currently passes the following tests from the [CHIP-8 test suite](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file):
+Chippy passes the following tests from the [CHIP-8 test suite](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file):
 
 - [CHIP-8 Splash Screen](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file#chip-8-splash-screen): ✅
 - [IBM Logo](https://github.com/Timendus/chip8-test-suite#ibm-logo): ✅
@@ -17,7 +17,13 @@ Chippy currently passes the following tests from the [CHIP-8 test suite](https:/
 
 ## Instructions
 
-To run, checkout the source and build. Chippy comes packaged with test ROMs that you can load via the interface on launch.
+To run, checkout the source and build. Chippy comes packaged with test ROMs that you can load via the interface on launch. Keyboard input maps to the CHIP-8's keyboard using the following keys:
+```
+1234
+qwer
+asdf
+zxcv
+```
 
 ## Screenshots
 
