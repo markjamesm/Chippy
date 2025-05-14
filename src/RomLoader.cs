@@ -34,7 +34,8 @@ public static class RomLoader
             Console.WriteLine("3 - Corax+ Opcode Test");
             Console.WriteLine("4 - Flags Test");
             Console.WriteLine("5 - Beep Test");
-            Console.WriteLine("6 - Exit Chippy\n");
+            Console.WriteLine("6 - Keypad Test");
+            Console.WriteLine("7 - Exit Chippy\n");
             Console.Write("Enter your choice: ");
 
             var romChoice = Console.ReadLine();
@@ -52,6 +53,8 @@ public static class RomLoader
                 case "5":
                     return romDirectory + "beep-test.ch8";
                 case "6":
+                    return romDirectory + "keypad-test.ch8";
+                case "7":
                     Console.WriteLine("Exiting Chippy...");
                     Environment.Exit(0);
                     break;

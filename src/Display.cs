@@ -34,4 +34,198 @@ public class Display
 
         Raylib.EndDrawing();
     }
+    
+    public static byte? ReadKeyDown()
+    {
+        if (Raylib.IsKeyDown(KeyboardKey.One))
+        {
+            return ConvertKeyToByte(KeyboardKey.One);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.Two))
+        {
+            return ConvertKeyToByte(KeyboardKey.Two);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.Three))
+        {
+            return ConvertKeyToByte(KeyboardKey.Three);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.Four))
+        {
+            return ConvertKeyToByte(KeyboardKey.Four);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.Q))
+        {
+            return ConvertKeyToByte(KeyboardKey.Q);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.W))
+        {
+            return ConvertKeyToByte(KeyboardKey.W);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.E))
+        {
+            return ConvertKeyToByte(KeyboardKey.E);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.R))
+        {
+            return ConvertKeyToByte(KeyboardKey.R);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.A))
+        {
+            return ConvertKeyToByte(KeyboardKey.A);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.S))
+        {
+            return ConvertKeyToByte(KeyboardKey.S);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.D))
+        {
+            return ConvertKeyToByte(KeyboardKey.D);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.F))
+        {
+            return ConvertKeyToByte(KeyboardKey.F);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.Z))
+        {
+            return ConvertKeyToByte(KeyboardKey.Z);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.X))
+        {
+            return ConvertKeyToByte(KeyboardKey.X);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.C))
+        {
+            return ConvertKeyToByte(KeyboardKey.C);
+        }
+        
+        if (Raylib.IsKeyDown(KeyboardKey.V))
+        {
+            return ConvertKeyToByte(KeyboardKey.V);
+        }
+
+        return null;
+    }
+    
+        public static byte? ReadKeyUp()
+    {
+        if (Raylib.IsKeyReleased(KeyboardKey.One))
+        {
+            return ConvertKeyToByte(KeyboardKey.One);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.Two))
+        {
+            return ConvertKeyToByte(KeyboardKey.Two);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.Three))
+        {
+            return ConvertKeyToByte(KeyboardKey.Three);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.Four))
+        {
+            return ConvertKeyToByte(KeyboardKey.Four);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.Q))
+        {
+            return ConvertKeyToByte(KeyboardKey.Q);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.W))
+        {
+            return ConvertKeyToByte(KeyboardKey.W);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.E))
+        {
+            return ConvertKeyToByte(KeyboardKey.E);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.R))
+        {
+            return ConvertKeyToByte(KeyboardKey.R);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.A))
+        {
+            return ConvertKeyToByte(KeyboardKey.A);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.S))
+        {
+            return ConvertKeyToByte(KeyboardKey.S);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.D))
+        {
+            return ConvertKeyToByte(KeyboardKey.D);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.F))
+        {
+            return ConvertKeyToByte(KeyboardKey.F);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.Z))
+        {
+            return ConvertKeyToByte(KeyboardKey.Z);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.X))
+        {
+            return ConvertKeyToByte(KeyboardKey.X);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.C))
+        {
+            return ConvertKeyToByte(KeyboardKey.C);
+        }
+        
+        if (Raylib.IsKeyReleased(KeyboardKey.V))
+        {
+            return ConvertKeyToByte(KeyboardKey.V);
+        }
+
+        return null;
+    }
+
+    private static byte? ConvertKeyToByte(KeyboardKey key)
+    {
+        return key switch
+        {
+            KeyboardKey.One => 0x1,
+            KeyboardKey.Two => 0x2,
+            KeyboardKey.Three => 0x3,
+            KeyboardKey.Four => 0xC,
+            KeyboardKey.Q => 0x4,
+            KeyboardKey.W => 0x5,
+            KeyboardKey.E => 0x6,
+            KeyboardKey.R => 0xD,
+            KeyboardKey.A => 0x7,
+            KeyboardKey.S => 0x8,
+            KeyboardKey.D => 0x9,
+            KeyboardKey.F => 0xE,
+            KeyboardKey.Z => 0xA,
+            KeyboardKey.X => 0x0,
+            KeyboardKey.C => 0xB,
+            KeyboardKey.V => 0xF,
+            _ => null
+        };
+    }
 }
