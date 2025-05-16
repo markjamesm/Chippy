@@ -2,6 +2,9 @@ namespace Chippy;
 
 public class Emulator
 {
+    private const int ProgramStart = 0x200;
+    private const int FontStart = 0;
+    
     private readonly byte[] _memory = new byte[4096];
 
     // Data registers
@@ -11,7 +14,7 @@ public class Emulator
     private ushort _i;
 
     // Program counter, start at program memory.
-    private int _pc = 0x200;
+    private int _pc = ProgramStart;
 
     private readonly Stack<int> _stack = new(16);
     private bool[,] _frameBuffer = new bool[32, 64];
@@ -24,9 +27,6 @@ public class Emulator
 
     private readonly AudioEngine _audioEngine;
     private readonly Display _display;
-
-    private const int ProgramStart = 0x200;
-    private const int FontStart = 0;
 
     public Emulator(byte[] romStream, AudioEngine audioEngine, Display display)
     {
