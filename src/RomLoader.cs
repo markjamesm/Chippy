@@ -2,7 +2,7 @@ namespace Chippy;
 
 public static class RomLoader
 {
-    public static string Load()
+    public static byte[] Load()
     {
         var romDir = GetRomDirectory();
         var romPath = GetRomPath(romDir);
@@ -13,7 +13,9 @@ public static class RomLoader
             Environment.Exit(1);
         }
         
-        return romPath;
+        var romStream = File.ReadAllBytes(romPath);
+        
+        return romStream;
     }
     
     private static string GetRomDirectory()

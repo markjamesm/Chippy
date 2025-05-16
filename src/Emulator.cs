@@ -28,12 +28,11 @@ public class Emulator
     private const int ProgramStart = 0x200;
     private const int FontStart = 0;
 
-    public Emulator(string romPath, AudioEngine audioEngine, Display display)
+    public Emulator(byte[] romStream, AudioEngine audioEngine, Display display)
     {
         _audioEngine = audioEngine;
         _display = display;
-
-        var romStream = File.ReadAllBytes(romPath);
+        
         romStream.CopyTo(_memory, ProgramStart);
         FontSet.Fonts.CopyTo(_memory, FontStart);
     }
