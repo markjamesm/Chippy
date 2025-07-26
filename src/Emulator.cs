@@ -87,36 +87,37 @@ public class Emulator
 
     private void Cycle()
     {
-        var opcode = FetchOpcode();
-        Decode(opcode);
+        var instruction = FetchInstruction();
+        Decode(instruction);
     }
 
-    private uint FetchOpcode()
+    private uint FetchInstruction()
     {
-        var opcode = (uint)(_memory[_pc] << 8 | _memory[_pc + 1]);
+        var instruction = (uint)(_memory[_pc] << 8 | _memory[_pc + 1]);
         _pc += 2;
 
-        return opcode;
+        return instruction;
     }
 
     #region Decode
 
-    private void Decode(uint opcode)
+    private void Decode(uint instruction)
     {
         // x & y refer to registers
-        var x = (byte)((opcode & 0x0F00) >> 8);
-        var y = (byte)((opcode & 0x00F0) >> 4);
+        var x = (byte)((instruction & 0x0F00) >> 8);
+        var y = (byte)((instruction & 0x00F0) >> 4);
 
         // n: hex bite, nn: hex nibble
-        var n = (byte)(opcode & 0x000F);
-        var nn = (byte)(opcode & 0x00FF);
+        var n = (byte)(instruction & 0x000F);
+        var nn = (byte)(instruction & 0x00FF);
 
         // nnn refers to a hexadecimal memory address.
-        var nnn = (ushort)(opcode & 0x0FFF);
+        var nnn = (ushort)(instruction & 0x0FFF);
 
-        switch (opcode & 0xF000)
+        // Get the opcode
+        switch (instruction & 0xF000)
         {
-            case 0x0000: Decode0000(opcode); break;
+            case 0x0000: Decode0000(instruction); break;
             case 0x1000: Execute1Nnn(nnn); break;
             case 0x2000: Execute2Nnn(nnn); break;
             case 0x3000: Execute3Xnn(x, nn); break;
@@ -124,29 +125,29 @@ public class Emulator
             case 0x5000: Execute5Xy0(x, y); break;
             case 0x6000: Execute6Xnn(x, nn); break;
             case 0x7000: Execute7Xnn(x, nn); break;
-            case 0x8000: Decode8000(opcode, x, y); break;
+            case 0x8000: Decode8000(instruction, x, y); break;
             case 0x9000: Execute9Xy0(x, y); break;
             case 0xA000: ExecuteAnnn(nnn); break;
             case 0xB000: ExecuteBnnn(nnn); break;
             case 0xC000: ExecuteCxnn(x, nn); break;
             case 0xD000: ExecuteDxyn(x, y, n); break;
-            case 0xE000: DecodeEx00(opcode, x); break;
-            case 0xF000: DecodeFx00(opcode, x); break;
+            case 0xE000: DecodeEx00(instruction, x); break;
+            case 0xF000: DecodeFx00(instruction, x); break;
         }
     }
 
-    private void Decode0000(uint opcode)
+    private void Decode0000(uint instruction)
     {
-        switch (opcode & 0x0FFF)
+        switch (instruction & 0x0FFF)
         {
             case 0x00E0: Execute00E0(); break;
             case 0x00EE: Execute00Ee(); break;
         }
     }
 
-    private void Decode8000(uint opcode, byte x, byte y)
+    private void Decode8000(uint instruction, byte x, byte y)
     {
-        switch (opcode & 0x000F)
+        switch (instruction & 0x000F)
         {
             case 0x0000: Execute8Xy0(x, y); break;
             case 0x0001: Execute8Xy1(x, y); break;
@@ -160,18 +161,18 @@ public class Emulator
         }
     }
 
-    private void DecodeEx00(uint opcode, byte x)
+    private void DecodeEx00(uint instruction, byte x)
     {
-        switch (opcode & 0x00F0)
+        switch (instruction & 0x00F0)
         {
             case 0x0090: ExecuteEx9E(x); break;
             case 0x00A0: ExecuteExA1(x); break;
         }
     }
 
-    private void DecodeFx00(uint opcode, byte x)
+    private void DecodeFx00(uint instruction, byte x)
     {
-        switch (opcode & 0x00FF)
+        switch (instruction & 0x00FF)
         {
             case 0x0007: ExecuteFx07(x); break;
             case 0x000A: ExecuteFx0A(x); break;
