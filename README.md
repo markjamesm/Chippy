@@ -8,12 +8,12 @@ Graphics and sound are implemented using the [Raylib C# bindings](https://github
 
 Chippy passes the following tests from the [CHIP-8 test suite](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file):
 
-- [CHIP-8 Splash Screen](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file#chip-8-splash-screen): ✅
-- [IBM Logo](https://github.com/Timendus/chip8-test-suite#ibm-logo): ✅
-- [Corax+ Opcode Test](https://github.com/Timendus/chip8-test-suite#corax-opcode-test): ✅
-- [Flags Test](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file#flags-test): ✅
-- [Beep Test](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file#beep-test): ✅ 
-- [Keypad Test](https://github.com/Timendus/chip8-test-suite#keypad-test): ✅
+- [CHIP-8 Splash Screen](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file#chip-8-splash-screen)
+- [IBM Logo](https://github.com/Timendus/chip8-test-suite#ibm-logo)
+- [Corax+ Opcode Test](https://github.com/Timendus/chip8-test-suite#corax-opcode-test)
+- [Flags Test](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file#flags-test)
+- [Beep Test](https://github.com/Timendus/chip8-test-suite?tab=readme-ov-file#beep-test)
+- [Keypad Test](https://github.com/Timendus/chip8-test-suite#keypad-test)
 
 ## Instructions
 
