@@ -1,8 +1,8 @@
 # Chippy
 
-Chippy is a [CHIP-8](https://en.wikipedia.org/wiki/CHIP-8) emulator (technically an interpreter...) written in C# targeting .NET 9. 
+Chippy is a [CHIP-8](https://en.wikipedia.org/wiki/CHIP-8) emulator (technically an interpreter...) written in C#.
 
-Graphics and sound are implemented using the [Raylib C# bindings](https://github.com/raylib-cs/raylib-cs).
+![Chippy - Chip-8 emulator flags test](https://github.com/user-attachments/assets/38930c75-d8c4-4901-8231-6a3b16336feb)
 
 ## Tests
 
@@ -27,10 +27,6 @@ zxcv
 
 ## Screenshots
 
-Chippy passing Corax+ opcode test:
+Chippy passing the Corax+ opcode test:
 
 ![Chippy - Passing Corax+ opcode test](https://github.com/user-attachments/assets/fd822186-6501-4946-bf4a-d324df607d8b)
-
-Flags test:
-
-![Chippy - Chip-8 emulator flags test](https://github.com/user-attachments/assets/38930c75-d8c4-4901-8231-6a3b16336feb)
